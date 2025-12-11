@@ -64,45 +64,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             MyApplication1Theme {
-                val navController = rememberNavController()
-                val taskViemodel: TaskViewModel =  androidx.lifecycle.viewmodel.compose.viewModel()
-                NavHost(navController = navController, startDestination = "TaskLogo"){
-                    composable("TaskLogo") {
-                        TaskSplashLogo(navController = navController)
-
-                    }
-                    composable("List") {
-                        TaskScreen(
-                            onAddClick = {navController.navigate("add")},
-                            onEditClick = {taskId-> navController.navigate("edit/$taskId")},
-                            viewModel = taskViemodel
-
-                        )
-                    }
-                    composable("add") {
-                        taskAddEditScreen(
-                            taskId = null,
-                            onSaved = {
-                                navController.popBackStack()
-                            },
-                            viewModel = taskViemodel
-                        )
-
-                    }
-                    composable(
-                        "edit/{taskId}",
-                        arguments = listOf(navArgument("taskid"){type = NavType.IntType})
-                    ){backStack ->
-                        val id = backStack.arguments?.getInt("taskId")
-                        taskAddEditScreen(
-                            taskId = id,
-                            onSaved = {navController.popBackStack()},
-                            viewModel = taskViemodel
-                        )
-                    }
-                }
-
-
+                TaskNavigator()
             }
         }
     }

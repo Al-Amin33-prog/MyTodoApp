@@ -24,6 +24,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -45,8 +46,16 @@ fun TaskScreen(
 ){
     val state by viewModel.uiState.collectAsState()
     Scaffold(
+        containerColor = Color(0xFFE8F5E9),
         topBar = {
-            TopAppBar(title = { Text("My Todo") })
+            TopAppBar(
+                title = { Text("My Todo") },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    Color(0xFF2E7D32),
+                    titleContentColor = Color.White
+                )
+
+                )
         },
         floatingActionButton = {
             FloatingActionButton(onAddClick) {

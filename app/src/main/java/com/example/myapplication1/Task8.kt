@@ -2,6 +2,7 @@ package com.example.myapplication1
 
 
 import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -13,6 +14,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,7 +37,7 @@ fun TaskSplashLogo(
             1f,
             animationSpec = tween(
                 durationMillis =  1000,
-                easing = FastOutSlowInEasing
+                easing = CubicBezierEasing(0.4f,0f,0.2f,1f)
             )
         )
         delay(2000)
@@ -53,7 +55,11 @@ fun TaskSplashLogo(
         Image(
             painter = painterResource(R.drawable.ic_todologo),
             contentDescription = "Logo",
-            modifier = Modifier.scale(scale.value)
+            modifier = Modifier
+                .fillMaxSize()
+                .scale(scale.value),
+            contentScale = ContentScale.Crop
+
         )
     }
 

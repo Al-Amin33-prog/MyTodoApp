@@ -1,5 +1,6 @@
 package com.example.myapplication1
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -19,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -35,28 +38,36 @@ fun taskAddEditScreen(
     val scope  = rememberCoroutineScope()
     var title by remember { mutableStateOf("") }
     var description by remember { mutableStateOf("") }
-    var isDone by remember { mutableStateOf(false) }
+    var hasLoaded by remember { mutableStateOf(false) }
 
 
     LaunchedEffect(taskId) {
-        if (taskId != null){
+        if (!hasLoaded && taskId != null){
             val task = viewModel.getTaskB(taskId)
             if (task != null){
                 title = task.title
                 description = task.description
             }
         }
-        isDone = true
+        hasLoaded = true
     }
     Scaffold(
+        containerColor = Color(0xFFF1F8E9),
         topBar = {
             TopAppBar(title = {
-                Text(if (taskId == null)"Add Todo" else "Edit Todo")
-            })
+                Text(if (taskId == null)"Add Todo" else "Edit Todo",
+                color = Color.Black)
+            },
+                colors = TopAppBarDefaults.topAppBarColors(
+                    containerColor = Color.White
+                )
+            )
         }
     ) {padding ->
         Column(
-            modifier = Modifier.padding(padding).padding(16.dp)
+            modifier = Modifier
+                .padding(padding).padding(16.dp)
+               // .background(Color(0xFFE8F5E9))
         ) {
             OutlinedTextField(
                 value = title,
@@ -67,7 +78,7 @@ fun taskAddEditScreen(
             Spacer(modifier = Modifier.height(12.dp))
             OutlinedTextField(
                 value = description,
-                onValueChange = {title = it},
+                onValueChange = {description = it},
                 label = {Text("Description")},
                 modifier = Modifier
                     .fillMaxWidth()

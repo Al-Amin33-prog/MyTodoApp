@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -73,7 +74,19 @@ fun taskAddEditScreen(
                 value = title,
                 onValueChange = {title = it},
                 label = {Text("Title")},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    Color.Black,
+                    Color.Black,
+                    Color.Black,
+
+                    focusedBorderColor = Color.Black,
+                    unfocusedBorderColor = Color.Black,
+
+                    focusedLabelColor = Color.Black,
+                    unfocusedLabelColor = Color.Black
+
+                )
             )
             Spacer(modifier = Modifier.height(12.dp))
             OutlinedTextField(
@@ -82,7 +95,16 @@ fun taskAddEditScreen(
                 label = {Text("Description")},
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(120.dp)
+                    .height(120.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    Color.Black,
+                    Color.Black,
+                    cursorColor = Color.Black,
+                    focusedBorderColor = Color.Black,
+                    unfocusedBorderColor = Color.DarkGray,
+                    focusedLabelColor = Color.Black,
+                    unfocusedLabelColor = Color.DarkGray
+                )
             )
             Spacer(modifier = Modifier.height(16.dp))
             Button(onClick = {

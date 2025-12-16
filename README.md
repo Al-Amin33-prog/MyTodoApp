@@ -1,13 +1,11 @@
-## Screenshots
+## Splash Screen
+![Splash Screen](app/screenshots/splash.jpg)
 
-### Splash Screen
-![Splash Screen](./screenshots/splash.png)
+## Todo List
+![Todo List](app/screenshots/list.jpg)
 
-### Todo List
-![Todo List](./screenshots/list.png)
+## Add / Edit Todo
+![Add Edit](app/screenshots/add_edit.jpg)
 
-### Add / Edit Todo
-![Add Edit](./screenshots/add_edit.png)
-
-### App Screen
-![App Screen](./screenshots/screen.png)
+## App Screen
+![App Screen](app/screenshots/screen.jpg)

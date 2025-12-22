@@ -68,7 +68,7 @@ fun  LoginScreen(
                 value = "",
                 onValueChange = {},
                 label = {Text("Email")},
-                leadingIcon = {R.drawable.ic_password_lock},
+                leadingIcon = {R.drawable.ic_password_lock },
                 modifier = Modifier.fillMaxWidth()
             )
             Spacer(modifier = Modifier.height(12.dp))

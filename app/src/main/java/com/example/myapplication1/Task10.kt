@@ -69,7 +69,9 @@ fun  LoginScreen(
                 onValueChange = {},
                 label = {Text("Email")},
                 leadingIcon = {R.drawable.ic_password_lock },
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth()
+
             )
             Spacer(modifier = Modifier.height(12.dp))
             OutlinedTextField(

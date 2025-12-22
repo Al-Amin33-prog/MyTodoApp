@@ -137,7 +137,7 @@ fun taskAddEditScreen(
 fun Task1Preview() {
     MyApplication1Theme {
        taskAddEditScreen(
-           1,
+           null,
            {},
            viewModel = viewModel()
        )

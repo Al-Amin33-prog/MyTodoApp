@@ -12,13 +12,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -38,7 +43,7 @@ fun  LoginScreen(
     onSkip: () -> Unit
 ){
     Scaffold(
-        containerColor = Color(0xFFE8F5E9),
+        containerColor = Color(0xffaeb4fd),
         topBar = {
             TopAppBar(
                 title = {
@@ -59,7 +64,7 @@ fun  LoginScreen(
     ) { padding ->
         Column(
             modifier = Modifier.Companion
-                .background(Color(0xFFE8F5E9))
+                .background(Color(0xff11d79b))
                 .fillMaxSize()
                 .padding(padding)
                 .padding(24.dp),
@@ -73,6 +78,8 @@ fun  LoginScreen(
             )
             Spacer(modifier = Modifier.Companion.height(32.dp))
             OutlinedTextField(
+                shape = OutlinedTextFieldDefaults.shape,
+                colors = TextFieldDefaults.colors(Color(0xffeeeeee),Color(0xffeeeeee),Color(0xffeeeeee)),
                 value = "",
                 onValueChange = {},
                 placeholder = {Text("Type in your Email")},
@@ -84,8 +91,10 @@ fun  LoginScreen(
             )
             Spacer(modifier = Modifier.Companion.height(12.dp))
             OutlinedTextField(
+            shape = OutlinedTextFieldDefaults.shape,
+                colors = TextFieldDefaults.colors(Color(0xffeeeeee)),
                 value = "",
-                {},
+               onValueChange =  {},
                 placeholder = {Text("Type in your Password")},
                 label = { Text("Password") },
                 leadingIcon = { R.drawable.ic_password_lock },
@@ -102,10 +111,19 @@ fun  LoginScreen(
             }
             Spacer(modifier = Modifier.Companion.height(24.dp))
             Button(
+                shape = ButtonDefaults.elevatedShape,
+                colors = ButtonColors(Color(0xffeeeeee),
+                    Color(0xFF2E7D32),Color(0xff36ddab),Color(0xff36ddab)),
                 onClick = {},
                 modifier = Modifier.Companion.fillMaxWidth()
+
             ) {
-                Text("Login", fontFamily = Lexend, fontWeight = FontWeight.Bold)
+                Text(
+                    "Login",
+                    fontFamily = Lexend,
+                    fontWeight = FontWeight.ExtraBold,
+                    color = Color.DarkGray
+                )
             }
 
 

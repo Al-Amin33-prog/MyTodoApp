@@ -33,10 +33,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.Todo.R
+import com.example.Todo.ui.theme.Lexend
 import com.example.Todo.ui.theme.MyApplication1Theme
 import com.example.myapplication1.data.local.entity.TaskEntity
 import com.example.myapplication1.repository.RepositoryProvider
@@ -70,7 +72,7 @@ fun TaskScreen(
         },
         floatingActionButton = {
             FloatingActionButton(onAddClick) {
-                Text("+")
+                Text("+", fontFamily = Lexend,fontWeight = FontWeight.Bold)
             }
         }
     ) { padding ->
@@ -185,6 +187,7 @@ fun TaskItem(
 @Composable
 fun Task01Preview() {
     MyApplication1Theme {
+
 
     }
 }

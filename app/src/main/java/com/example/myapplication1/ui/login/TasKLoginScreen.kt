@@ -1,4 +1,4 @@
-package com.example.myapplication1
+package com.example.myapplication1.ui.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -26,8 +26,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myapplication1.ui.theme.Lexend
-import com.example.myapplication1.ui.theme.MyApplication1Theme
+import com.example.Todo.R
+import com.example.Todo.ui.theme.Lexend
+import com.example.Todo.ui.theme.MyApplication1Theme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -35,12 +36,17 @@ fun  LoginScreen(
     onSkip: () -> Unit
 ){
     Scaffold(
+        containerColor = Color(0xFFE8F5E9),
         topBar = {
             TopAppBar(
-                title = {Text("Welcome Back",
-                    fontFamily = Lexend,
-                    fontWeight = FontWeight.Bold,
-                    style = MaterialTheme.typography.headlineLarge)},
+                title = {
+                    Text(
+                        "Welcome Back",
+                        fontFamily = Lexend,
+                        fontWeight = FontWeight.Companion.Bold,
+                        style = MaterialTheme.typography.headlineLarge
+                    )
+                },
                 actions = {
                     TextButton(onClick = onSkip) {
                         Text("Skip For Now")
@@ -48,44 +54,46 @@ fun  LoginScreen(
                 }
             )
         }
-    ) {padding ->
+    ) { padding ->
         Column(
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .background(Color(0xFFE8F5E9))
                 .fillMaxSize()
                 .padding(padding)
                 .padding(24.dp),
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.Companion.CenterHorizontally
         ) {
             Image(
                 painter = painterResource(R.drawable.ic_todologo),
                 "Logo",
-                modifier = Modifier.size(100.dp)
+                modifier = Modifier.Companion.size(100.dp)
             )
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.Companion.height(32.dp))
             OutlinedTextField(
                 value = "",
                 onValueChange = {},
-                label = {Text("Email")},
-                leadingIcon = {R.drawable.ic_password_lock },
-                modifier = Modifier
+                placeholder = {Text("Type in your Email")},
+                label = { Text("Email") },
+                leadingIcon = { R.drawable.ic_password_lock },
+                modifier = Modifier.Companion
                     .fillMaxWidth()
 
             )
-            Spacer(modifier = Modifier.height(12.dp))
+            Spacer(modifier = Modifier.Companion.height(12.dp))
             OutlinedTextField(
                 value = "",
                 {},
-                label = {Text("Password")},
-                leadingIcon = {R.drawable.ic_password_lock},
-                modifier = Modifier.fillMaxWidth()
+                placeholder = {Text("Type in your Password")},
+                label = { Text("Password") },
+                leadingIcon = { R.drawable.ic_password_lock },
+                modifier = Modifier.Companion.fillMaxWidth()
 
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.Companion.height(24.dp))
             Button(
                 onClick = {},
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.Companion.fillMaxWidth()
             ) {
                 Text("Login")
             }

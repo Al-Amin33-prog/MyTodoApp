@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -43,13 +45,13 @@ fun  LoginScreen(
                     Text(
                         "Welcome Back",
                         fontFamily = Lexend,
-                        fontWeight = FontWeight.Companion.Bold,
+                        fontWeight = FontWeight.Companion.ExtraBold,
                         style = MaterialTheme.typography.headlineLarge
                     )
                 },
                 actions = {
                     TextButton(onClick = onSkip) {
-                        Text("Skip For Now")
+                        Text("Skip For Now", fontWeight = FontWeight.Bold)
                     }
                 }
             )
@@ -90,6 +92,14 @@ fun  LoginScreen(
                 modifier = Modifier.Companion.fillMaxWidth()
 
             )
+            Spacer(modifier = Modifier.Companion.height(24.dp))
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+
+            ) {
+               Text("Forgot Password?",fontFamily= Lexend, fontWeight = FontWeight.SemiBold)
+            }
             Spacer(modifier = Modifier.Companion.height(24.dp))
             Button(
                 onClick = {},

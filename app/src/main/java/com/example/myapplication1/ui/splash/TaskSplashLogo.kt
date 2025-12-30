@@ -1,9 +1,7 @@
-package com.example.myapplication1
-
+package com.example.myapplication1.ui.splash
 
 import androidx.compose.animation.core.Animatable
 import androidx.compose.animation.core.CubicBezierEasing
-import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
@@ -19,13 +17,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
-import com.example.myapplication1.ui.theme.MyApplication1Theme
+import com.example.Todo.R
+import com.example.myapplication1.viewmodel.TaskViewModel
+import com.example.Todo.ui.theme.MyApplication1Theme
+import com.example.myapplication1.repository.RepositoryProvider
+import com.example.myapplication1.viewmodel.TaskViewModelFactory
 import kotlinx.coroutines.delay
 
 @Composable
 fun TaskSplashLogo(
     navController: NavController,
-    viewmodel: TaskViewModel = viewModel()
 ){
     val scale = remember {
         Animatable(
@@ -36,37 +37,38 @@ fun TaskSplashLogo(
         scale.animateTo(
             1f,
             animationSpec = tween(
-                durationMillis =  1000,
-                easing = CubicBezierEasing(0.4f,0f,0.2f,1f)
+                durationMillis = 1000,
+                easing = CubicBezierEasing(0.4f, 0f, 0.2f, 1f)
             )
         )
         delay(2000)
-        navController.navigate("List"){
-            popUpTo("TaskLogo"){inclusive = true}
+        navController.navigate("List") {
+            popUpTo("TaskLogo") { inclusive = true }
         }
 
     }
     Box(
-        contentAlignment = Alignment.Center,
-      modifier = Modifier
-          .fillMaxSize()
+        contentAlignment = Alignment.Companion.Center,
+        modifier = Modifier.Companion
+            .fillMaxSize()
 
     ) {
         Image(
             painter = painterResource(R.drawable.ic_todologo),
             contentDescription = "Logo",
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxSize()
                 .scale(scale.value),
-            contentScale = ContentScale.Crop
+            contentScale = ContentScale.Companion.Crop
 
         )
     }
 
 }
+
 @Preview(showBackground = true)
 @Composable
-fun logo(){
+fun Logo(){
     MyApplication1Theme {
 
 

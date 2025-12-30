@@ -56,7 +56,7 @@ fun  LoginScreen(
                 },
                 actions = {
                     TextButton(onClick = onSkip) {
-                        Text("Skip For Now", fontWeight = FontWeight.Bold)
+                        Text("Skip For Now", fontFamily = Lexend, fontWeight = FontWeight.Bold)
                     }
                 }
             )

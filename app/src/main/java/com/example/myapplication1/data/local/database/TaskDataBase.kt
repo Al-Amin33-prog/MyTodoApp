@@ -2,7 +2,7 @@ package com.example.myapplication1.data.local.database
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.example.myapplication1.data.local.TaskEntity
+import com.example.myapplication1.data.local.entity.TaskEntity
 import com.example.myapplication1.data.local.dao.TaskDao
 
 @Database(

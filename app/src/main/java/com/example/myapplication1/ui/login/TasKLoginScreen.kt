@@ -105,7 +105,7 @@ fun  LoginScreen(
                 onClick = {},
                 modifier = Modifier.Companion.fillMaxWidth()
             ) {
-                Text("Login")
+                Text("Login", fontFamily = Lexend, fontWeight = FontWeight.Bold)
             }
 
 

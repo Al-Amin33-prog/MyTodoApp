@@ -1,4 +1,4 @@
-package com.example.myapplication1
+package com.example.myapplication1.ui.task
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
@@ -36,15 +36,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.myapplication1.ui.theme.MyApplication1Theme
+import com.example.Todo.R
+import com.example.Todo.ui.theme.MyApplication1Theme
+import com.example.myapplication1.data.local.entity.TaskEntity
+import com.example.myapplication1.repository.RepositoryProvider
+import com.example.myapplication1.repository.TaskRepository
+import com.example.myapplication1.ui.state.TaskState
+import com.example.myapplication1.viewmodel.TaskViewModel
+import com.example.myapplication1.viewmodel.TaskViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TaskScreen(
     onAddClick: () -> Unit,
     onEditClick: (Int) -> Unit,
-    viewModel: TaskViewModel = viewModel()
-){
+    viewModel: TaskViewModel
+    )
+
+    {
+
     val state by viewModel.uiState.collectAsState()
     Scaffold(
         containerColor = Color(0xFFE8F5E9),
@@ -53,50 +63,53 @@ fun TaskScreen(
                 title = { Text("My Todo") },
                 colors = TopAppBarDefaults.topAppBarColors(
                     Color(0xFF2E7D32),
-                    titleContentColor = Color.White
+                    titleContentColor = Color.Companion.White
                 )
 
-                )
+            )
         },
         floatingActionButton = {
             FloatingActionButton(onAddClick) {
                 Text("+")
             }
         }
-    ) {padding ->
+    ) { padding ->
         Box(
-            modifier = Modifier
+            modifier = Modifier.Companion
                 .fillMaxSize()
                 .padding(padding)
         ) {
-            when(state){
-                is TaskState.TaskLoading-> {
-                    CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+            when (state) {
+                is TaskState.TaskLoading -> {
+                    CircularProgressIndicator(modifier = Modifier.Companion.align(Alignment.Companion.Center))
                 }
+
                 is TaskState.TaskEmpty -> {
                     Text(
                         "No todos yet, Tap the + to add one",
-                       modifier = Modifier.align(Alignment.Center)
+                        modifier = Modifier.Companion.align(Alignment.Center)
                     )
                 }
+
                 is TaskState.TaskError -> {
                     Text(
                         text = (state as TaskState.TaskError).message,
-                        modifier = Modifier.align(Alignment.Center)
+                        modifier = Modifier.Companion.align(Alignment.Center)
                     )
                 }
+
                 is TaskState.TaskSuccess -> {
                     val tasks = (state as TaskState.TaskSuccess).taskModel
-                    LazyColumn(modifier = Modifier.fillMaxSize()) {
-                        items(tasks, key = {it.id}){tasks ->
+                    LazyColumn(modifier = Modifier.Companion.fillMaxSize()) {
+                        items(tasks, key = { it.id }) { tasks ->
                             TaskItem(
                                 task = tasks,
-                                onCheckedChange = {checked ->
-                                    viewModel.toggleTask(tasks.copy(isDone = checked))
+                                onCheckedChange = { checked ->
+                                    viewModel.updateTask(tasks.copy(isCompleted = checked))
 
                                 },
-                                onEditClick = {onEditClick(tasks.id)},
-                                onDeleteClick = {viewModel.deleteTask(tasks.id)}
+                                onEditClick = { onEditClick(tasks.id) },
+                                onDeleteClick = { viewModel.deleteTask(tasks) }
 
                             )
 
@@ -110,52 +123,57 @@ fun TaskScreen(
 
 
 }
+
 @Composable
 fun TaskItem(
-    task: TaskModel,
+    task: TaskEntity,
     onCheckedChange: (Boolean )-> Unit,
     onEditClick:() -> Unit,
     onDeleteClick:() -> Unit
 ){
     Card(
-        modifier = Modifier
+        modifier = Modifier.Companion
             .padding(8.dp)
             .fillMaxWidth()
-            .clickable{onEditClick()},
+            .clickable { onEditClick() },
         elevation = CardDefaults.cardElevation(4.dp)
     ) {
         Row(
-          modifier = Modifier.padding(12.dp),
-            verticalAlignment = Alignment.CenterVertically
+            modifier = Modifier.Companion.padding(12.dp),
+            verticalAlignment = Alignment.Companion.CenterVertically
 
 
         ) {
             Checkbox(
-                checked = task.isDone,
+                checked = task.isCompleted,
                 onCheckedChange = onCheckedChange,
                 colors = CheckboxDefaults.colors(
                     checkedColor = Color(0xFF2E7D32),
-                    checkmarkColor = Color.White,
-                    uncheckedColor = Color.Gray
+                    checkmarkColor = Color.Companion.White,
+                    uncheckedColor = Color.Companion.Gray
                 )
             )
-            Spacer(modifier = Modifier.width(12.dp))
-            Column(modifier = Modifier.weight(1f)) {
+            Spacer(modifier = Modifier.Companion.width(12.dp))
+            Column(modifier = Modifier.Companion.weight(1f)) {
                 Text(task.title, style = MaterialTheme.typography.titleMedium)
-                if (task.description.isNotBlank()){
-                    Spacer(modifier = Modifier.height(4.dp))
+                if (task.description.isNotBlank()) {
+                    Spacer(modifier = Modifier.Companion.height(4.dp))
                     Text(task.description, style = MaterialTheme.typography.bodySmall)
                 }
             }
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.Companion.width(8.dp))
             IconButton(onClick = onEditClick) {
-                Icon(painter = painterResource(R.drawable.ic_edit, ),
+                Icon(
+                    painter = painterResource(R.drawable.ic_edit),
 
-                    contentDescription = "Edit")
+                    contentDescription = "Edit"
+                )
             }
             IconButton(onClick = onDeleteClick) {
-                Icon(painter = painterResource(R.drawable.ic_delete, ),
-                    contentDescription = "Delete")
+                Icon(
+                    painter = painterResource(R.drawable.ic_delete),
+                    contentDescription = "Delete"
+                )
             }
         }
 
@@ -167,10 +185,7 @@ fun TaskItem(
 @Composable
 fun Task01Preview() {
     MyApplication1Theme {
-        TaskScreen(
-            {},
-            {},
-            viewModel = viewModel()
-        )
+
+
     }
 }
